@@ -20,4 +20,5 @@
         android:name="com.example.flashscore.more_actions"
         android:label="@string/more_actions"
         tools:layout="@layout/fragment_more_actions" />
+
 </navigation>
