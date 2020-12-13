@@ -3,7 +3,9 @@ package com.example.flashscore;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+
+import com.example.flashscore.Api.FootballApi;
+import com.example.flashscore.DataModels.Country;
 
 import java.util.List;
 

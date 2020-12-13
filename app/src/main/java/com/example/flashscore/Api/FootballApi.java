@@ -1,7 +1,6 @@
-package com.example.flashscore;
+package com.example.flashscore.Api;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -9,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.flashscore.DataModels.Country;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +40,7 @@ public class FootballApi {
     }
 
     public void getCountries(final CountriesResponse countriesResponse) {
-        String url = BASE_URL + ApiEndpoints.COUNTRIES;
+        String url = BASE_URL + Endpoints.COUNTRIES;
         final List<Country> countryList = new ArrayList<>();
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(

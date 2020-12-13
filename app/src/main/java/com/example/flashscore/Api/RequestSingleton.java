@@ -1,4 +1,4 @@
-package com.example.flashscore;
+package com.example.flashscore.Api;
 
 import android.content.Context;
 

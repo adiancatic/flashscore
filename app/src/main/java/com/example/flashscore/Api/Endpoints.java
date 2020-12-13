@@ -1,6 +1,6 @@
-package com.example.flashscore;
+package com.example.flashscore.Api;
 
-public class ApiEndpoints {
+public class Endpoints {
 
     public static final String COUNTRIES = "countries";
 
