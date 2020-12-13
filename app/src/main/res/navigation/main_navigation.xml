@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/fr_matches_all">
+
+    <fragment
+        android:id="@+id/fr_matches_all"
+        android:name="com.example.flashscore.MatchesAll"
+        android:label="@string/matches_all"
+        tools:layout="@layout/fragment_matches_all" />
+    <fragment
+        android:id="@+id/fr_matches_live"
+        android:name="com.example.flashscore.matches_live"
+        android:label="@string/matches_live"
+        tools:layout="@layout/fragment_matches_live" />
+    <fragment
+        android:id="@+id/fr_more_actions"
+        android:name="com.example.flashscore.more_actions"
+        android:label="@string/more_actions"
+        tools:layout="@layout/fragment_more_actions" />
+</navigation>

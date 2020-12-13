@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fr_matches_all"
+        android:icon="@drawable/ic_football_field"
+        android:title="@string/matches_all" />
+
+    <item
+        android:id="@+id/fr_matches_live"
+        android:icon="@drawable/ic_football_ball"
+        android:title="@string/matches_live" />
+
+    <item
+        android:id="@+id/fr_more_actions"
+        android:icon="@drawable/ic_more"
+        android:title="@string/more_actions" />
+
+</menu>
