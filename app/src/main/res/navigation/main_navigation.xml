@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_matches_live" />
     <fragment
         android:id="@+id/fr_more_actions"
-        android:name="com.example.flashscore.more_actions"
+        android:name="com.example.flashscore.Fragments.FragmentMoreActions"
         android:label="@string/more_actions"
         tools:layout="@layout/fragment_more_actions" />
 
