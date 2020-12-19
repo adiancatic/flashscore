@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.flashscore.Adapters.AdapterMoreActions;
 import com.example.flashscore.MoreActionsItem;
 import com.example.flashscore.R;
 

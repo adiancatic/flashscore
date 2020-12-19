@@ -1,4 +1,4 @@
-package com.example.flashscore.Fragments;
+package com.example.flashscore.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
