@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.flashscore.Api.FootballApi;
 import com.example.flashscore.DataModels.Country;
+import com.example.flashscore.DataModels.Fixture;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashSet;
@@ -34,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(List<Country> countryList) {
                 System.out.println(countryList);
+            }
+        });
+
+        footballApi.getFixtures(new FootballApi.FixturesResponse() {
+            @Override
+            public void onError(String message) {
+                System.out.println("Something wrong");
+            }
+
+            @Override
+            public void onResponse(List<Fixture> fixtureList) {
+                System.out.println(fixtureList);
             }
         });
 

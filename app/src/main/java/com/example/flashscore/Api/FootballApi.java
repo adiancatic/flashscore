@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.flashscore.DataModels.Country;
+import com.example.flashscore.DataModels.Fixture;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,10 @@ public class FootballApi {
     private void setApiKey() {
         this.apiKey = "";
     }
+
+    /*
+     * Countries
+     */
 
     public interface CountriesResponse {
         void onError(String message);
@@ -74,6 +79,65 @@ public class FootballApi {
                         Log.e("Rest Error", error.toString());
                         error.printStackTrace();
                         countriesResponse.onError("Something wrong");
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("X-RapidAPI-Key", apiKey);
+
+                return params;
+            }
+        };
+
+        RequestSingleton.getInstance(context).addToRequestQueue(objectRequest);
+    }
+
+    /*
+     * Fixtures
+     */
+
+    public interface FixturesResponse {
+        void onError(String message);
+        void onResponse(List<Fixture> fixtureList);
+    }
+
+    public void getFixtures(final FixturesResponse fixturesResponse) {
+        String url = BASE_URL + Endpoints.FIXTURES_LIVE;
+        final List<Fixture> fixtureList = new ArrayList<>();
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Rest Response", response.toString());
+                        try {
+                            JSONObject api = response.getJSONObject("api");
+                            JSONArray apiFixtureList = api.getJSONArray("fixtures");
+                            Fixture fixture = new Fixture();
+                            for (int i = 0; i < apiFixtureList.length(); i++) {
+                                JSONObject apiFixture = (JSONObject) apiFixtureList.get(i);
+                                fixture.setId(apiFixture.getInt("fixture_id"));
+                                fixture.setLeague_id(apiFixture.getInt("league_id"));
+                                fixture.setVenue(apiFixture.getString("venue"));
+                                fixtureList.add(fixture);
+                            }
+                            fixturesResponse.onResponse(fixtureList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Rest Error", error.toString());
+                        error.printStackTrace();
+                        fixturesResponse.onError("Something wrong");
                     }
                 }
         ) {
