@@ -38,17 +38,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        footballApi.getFixtures(new FootballApi.FixturesResponse() {
-            @Override
-            public void onError(String message) {
-                System.out.println("Something wrong");
-            }
-
-            @Override
-            public void onResponse(List<Fixture> fixtureList) {
-                System.out.println(fixtureList);
-            }
-        });
 
         /*
          * Navigation

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_matches_all" />
     <fragment
         android:id="@+id/fr_matches_live"
-        android:name="com.example.flashscore.matches_live"
+        android:name="com.example.flashscore.Fragments.FragmentMatchesLive"
         android:label="@string/matches_live"
         tools:layout="@layout/fragment_matches_live" />
     <fragment

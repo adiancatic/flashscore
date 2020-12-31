@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class FootballApi {
 
@@ -118,12 +119,26 @@ public class FootballApi {
                         try {
                             JSONObject api = response.getJSONObject("api");
                             JSONArray apiFixtureList = api.getJSONArray("fixtures");
-                            Fixture fixture = new Fixture();
                             for (int i = 0; i < apiFixtureList.length(); i++) {
+                                Fixture fixture = new Fixture();
+
                                 JSONObject apiFixture = (JSONObject) apiFixtureList.get(i);
                                 fixture.setId(apiFixture.getInt("fixture_id"));
                                 fixture.setLeague_id(apiFixture.getInt("league_id"));
                                 fixture.setVenue(apiFixture.getString("venue"));
+
+                                JSONObject homeTeamApi = apiFixture.getJSONObject("homeTeam");
+                                Map<String, String> homeTeam = new HashMap<>();
+                                homeTeam.put("teamId", homeTeamApi.getString("team_id"));
+                                homeTeam.put("teamName", homeTeamApi.getString("team_name"));
+                                fixture.setHomeTeam(homeTeam);
+
+                                JSONObject awayTeamApi = apiFixture.getJSONObject("awayTeam");
+                                Map<String, String> awayTeam = new HashMap<>();
+                                awayTeam.put("teamId", awayTeamApi.getString("team_id"));
+                                awayTeam.put("teamName", awayTeamApi.getString("team_name"));
+                                fixture.setAwayTeam(awayTeam);
+
                                 fixtureList.add(fixture);
                             }
                             fixturesResponse.onResponse(fixtureList);
