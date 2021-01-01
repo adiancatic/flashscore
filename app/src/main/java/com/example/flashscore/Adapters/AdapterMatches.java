@@ -11,29 +11,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.flashscore.DataModels.Fixture;
-import com.example.flashscore.MoreActionsItem;
 import com.example.flashscore.R;
 
 import java.util.List;
 
-public class AdapterMatchesLive extends RecyclerView.Adapter<AdapterMatchesLive.ViewHolder> {
+public class AdapterMatches extends RecyclerView.Adapter<AdapterMatches.ViewHolder> {
 
     List<Fixture> fixtureItemList;
 
-    public AdapterMatchesLive(List<Fixture> fixtureItemList) {
+    public AdapterMatches(List<Fixture> fixtureItemList) {
         this.fixtureItemList = fixtureItemList;
     }
 
     @NonNull
     @Override
-    public AdapterMatchesLive.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterMatches.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.frame_fixtures_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterMatchesLive.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterMatches.ViewHolder holder, int position) {
         holder.homeTeamName.setText(fixtureItemList.get(position).getHomeTeam().get("teamName"));
         Glide.with(holder.homeTeamLogo.getContext()).load(fixtureItemList.get(position).getHomeTeam().get("teamLogo")).into(holder.homeTeamLogo);
         holder.homeTeamGoals.setText(String.valueOf(fixtureItemList.get(position).getGoalsHomeTeam()));
@@ -41,6 +40,16 @@ public class AdapterMatchesLive extends RecyclerView.Adapter<AdapterMatchesLive.
         holder.awayTeamName.setText(fixtureItemList.get(position).getAwayTeam().get("teamName"));
         Glide.with(holder.awayTeamLogo.getContext()).load(fixtureItemList.get(position).getAwayTeam().get("teamLogo")).into(holder.awayTeamLogo);
         holder.awayTeamGoals.setText(String.valueOf(fixtureItemList.get(position).getGoalsAwayTeam()));
+
+        String elapsed = "";
+        if(fixtureItemList.get(position).isStatusHalfTime()) {
+            elapsed = "HT";
+        } else if(fixtureItemList.get(position).isStatusFullTime()) {
+            elapsed = "FT";
+        } else {
+            elapsed = fixtureItemList.get(position).getElapsed() + "'";
+        }
+        holder.elapsed.setText(elapsed);
     }
 
     @Override
@@ -57,6 +66,8 @@ public class AdapterMatchesLive extends RecyclerView.Adapter<AdapterMatchesLive.
         ImageView awayTeamLogo;
         TextView awayTeamGoals;
 
+        TextView elapsed;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             homeTeamName = itemView.findViewById(R.id.tv_fixtures_item_team_name_home);
@@ -66,6 +77,8 @@ public class AdapterMatchesLive extends RecyclerView.Adapter<AdapterMatchesLive.
             awayTeamName = itemView.findViewById(R.id.tv_fixtures_item_team_name_away);
             awayTeamLogo = itemView.findViewById(R.id.iv_fixtures_item_team_logo_away);
             awayTeamGoals = itemView.findViewById(R.id.tv_fixtures_item_result_away);
+
+            elapsed = itemView.findViewById(R.id.tv_fixtures_item_time);
         }
     }
 }

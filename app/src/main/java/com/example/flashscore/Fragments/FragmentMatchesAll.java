@@ -1,15 +1,14 @@
 package com.example.flashscore.Fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.flashscore.Adapters.AdapterMatches;
 import com.example.flashscore.Api.FootballApi;
@@ -22,13 +21,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentMatchesLive extends Fragment {
+public class FragmentMatchesAll extends Fragment {
 
     private RecyclerView recyclerView;
     private List<Fixture> fixturesItemList;
     private View view;
 
-    public FragmentMatchesLive() {
+    public FragmentMatchesAll() {
         // Required empty public constructor
     }
 
@@ -60,7 +59,7 @@ public class FragmentMatchesLive extends Fragment {
 
                 fixturesItemList = fixtureList;
             }
-        }, footballApi.FIXTURE_TYPE_LIVE);
+        }, footballApi.FIXTURE_TYPE_DATE);
     }
 
 }

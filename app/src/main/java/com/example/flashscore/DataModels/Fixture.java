@@ -11,6 +11,7 @@ public class Fixture {
     private int goalsHomeTeam;
     private int goalsAwayTeam;
     private int elapsed;
+    private String status;
 
     private String venue;
 
@@ -95,5 +96,21 @@ public class Fixture {
 
     public void setVenue(String venue) {
         this.venue = venue;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isStatusHalfTime() {
+        return this.status.equals("Halftime");
+    }
+
+    public boolean isStatusFullTime() {
+        return this.status.equals("Fulltime");
     }
 }

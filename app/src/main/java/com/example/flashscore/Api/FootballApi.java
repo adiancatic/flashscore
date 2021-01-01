@@ -27,6 +27,9 @@ public class FootballApi {
     private static final String BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/";
     private String apiKey;
 
+    public static int FIXTURE_TYPE_LIVE = 1;
+    public static int FIXTURE_TYPE_DATE = 2;
+
     public FootballApi(Context context) {
         this.context = context;
         setApiKey();
@@ -104,8 +107,13 @@ public class FootballApi {
         void onResponse(List<Fixture> fixtureList);
     }
 
-    public void getFixtures(final FixturesResponse fixturesResponse) {
-        String url = BASE_URL + Endpoints.FIXTURES_LIVE;
+    public void getFixtures(final FixturesResponse fixturesResponse, int type) {
+        String url = "";
+        if(type == FIXTURE_TYPE_LIVE) {
+            url = BASE_URL + Endpoints.FIXTURES_LIVE;
+        } else if(type == FIXTURE_TYPE_DATE) {
+            url = BASE_URL + Endpoints.FIXTURES_DATE + "/" + java.time.LocalDate.now() + "?timezone=Europe/Ljubljana";
+        }
         final List<Fixture> fixtureList = new ArrayList<>();
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -141,8 +149,17 @@ public class FootballApi {
                                 awayTeam.put("teamLogo", awayTeamApi.getString("logo"));
                                 fixture.setAwayTeam(awayTeam);
 
-                                fixture.setGoalsHomeTeam(apiFixture.getInt("goalsHomeTeam"));
-                                fixture.setGoalsAwayTeam(apiFixture.getInt("goalsAwayTeam"));
+                                fixture.setGoalsHomeTeam(0);
+                                if(!apiFixture.isNull("goalsHomeTeam")) {
+                                    fixture.setGoalsHomeTeam(apiFixture.getInt("goalsHomeTeam"));
+                                }
+                                fixture.setGoalsAwayTeam(0);
+                                if(!apiFixture.isNull("goalsAwayTeam")) {
+                                    fixture.setGoalsAwayTeam(apiFixture.getInt("goalsAwayTeam"));
+                                }
+
+                                fixture.setElapsed(apiFixture.getInt("elapsed"));
+                                fixture.setStatus(apiFixture.getString("status"));
 
                                 fixtureList.add(fixture);
                             }

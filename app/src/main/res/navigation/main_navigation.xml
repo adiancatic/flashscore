@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fr_matches_all"
-        android:name="com.example.flashscore.MatchesAll"
+        android:name="com.example.flashscore.Fragments.FragmentMatchesAll"
         android:label="@string/matches_all"
         tools:layout="@layout/fragment_matches_all" />
     <fragment
