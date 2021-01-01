@@ -1,5 +1,10 @@
 package com.example.flashscore.DataModels;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 public class Fixture {
@@ -12,6 +17,7 @@ public class Fixture {
     private int goalsAwayTeam;
     private int elapsed;
     private String status;
+    private Date eventDate;
 
     private String venue;
 
@@ -111,6 +117,70 @@ public class Fixture {
     }
 
     public boolean isStatusFullTime() {
-        return this.status.equals("Fulltime");
+        return this.status.equals("Match Finished");
+    }
+
+    public boolean isStatusNotStarted() {
+        return this.status.equals("Not Started");
+    }
+
+    public boolean isStatusPostponed() {
+        return this.status.equals("Match Postponed");
+    }
+
+    public String getElapsedString() {
+        if(this.isStatusNotStarted() || this.isStatusPostponed()) {
+            return "";
+        } else if(this.isStatusHalfTime()) {
+            return "HT";
+        } else if(this.isStatusFullTime()) {
+            return "FT";
+        } else {
+            return this.getElapsed() + "'";
+        }
+    }
+
+    public String getHomeResultString() {
+        if(this.isStatusNotStarted()) {
+            return "";
+        } else if(this.isStatusPostponed()) {
+            return "";
+        } else {
+            return String.valueOf(this.getGoalsHomeTeam());
+        }
+    }
+
+    public String getAwayResultString() {
+        if(this.isStatusNotStarted()) {
+            return "";
+        } else if(this.isStatusPostponed()) {
+            return "";
+        } else {
+            return String.valueOf(this.getGoalsAwayTeam());
+        }
+    }
+
+    public String getSeparatorResultString() {
+        if(this.isStatusNotStarted()) {
+            return this.getEventDateStartTime();
+        } else if(this.isStatusPostponed()) {
+            return "PST";
+        } else {
+            return "-";
+        }
+    }
+
+    public String getEventDateFull() {
+        DateFormat dateFormat = new SimpleDateFormat("dd. MM. YYYY");
+        return dateFormat.format(eventDate);
+    }
+
+    public String getEventDateStartTime() {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        return dateFormat.format(eventDate);
+    }
+
+    public void setEventDate(long eventTimestamp) {
+        this.eventDate = new Date(eventTimestamp * 1000L);
     }
 }

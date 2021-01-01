@@ -1,5 +1,7 @@
 package com.example.flashscore.Adapters;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -35,21 +38,20 @@ public class AdapterMatches extends RecyclerView.Adapter<AdapterMatches.ViewHold
     public void onBindViewHolder(@NonNull AdapterMatches.ViewHolder holder, int position) {
         holder.homeTeamName.setText(fixtureItemList.get(position).getHomeTeam().get("teamName"));
         Glide.with(holder.homeTeamLogo.getContext()).load(fixtureItemList.get(position).getHomeTeam().get("teamLogo")).into(holder.homeTeamLogo);
-        holder.homeTeamGoals.setText(String.valueOf(fixtureItemList.get(position).getGoalsHomeTeam()));
 
         holder.awayTeamName.setText(fixtureItemList.get(position).getAwayTeam().get("teamName"));
         Glide.with(holder.awayTeamLogo.getContext()).load(fixtureItemList.get(position).getAwayTeam().get("teamLogo")).into(holder.awayTeamLogo);
-        holder.awayTeamGoals.setText(String.valueOf(fixtureItemList.get(position).getGoalsAwayTeam()));
 
-        String elapsed = "";
-        if(fixtureItemList.get(position).isStatusHalfTime()) {
-            elapsed = "HT";
-        } else if(fixtureItemList.get(position).isStatusFullTime()) {
-            elapsed = "FT";
+        holder.resultSeparator.setText(fixtureItemList.get(position).getSeparatorResultString());
+        holder.homeTeamGoals.setText(fixtureItemList.get(position).getHomeResultString());
+        holder.awayTeamGoals.setText(fixtureItemList.get(position).getAwayResultString());
+
+        holder.elapsed.setText(fixtureItemList.get(position).getElapsedString());
+        if(fixtureItemList.get(position).isStatusFullTime()) {
+            holder.elapsed.setTextColor(ContextCompat.getColor(holder.elapsed.getContext(), R.color.colorGray));
         } else {
-            elapsed = fixtureItemList.get(position).getElapsed() + "'";
+            holder.elapsed.setTextColor(ContextCompat.getColor(holder.elapsed.getContext(), R.color.colorPrimary));
         }
-        holder.elapsed.setText(elapsed);
     }
 
     @Override
@@ -60,11 +62,13 @@ public class AdapterMatches extends RecyclerView.Adapter<AdapterMatches.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView homeTeamName;
         ImageView homeTeamLogo;
-        TextView homeTeamGoals;
 
         TextView awayTeamName;
         ImageView awayTeamLogo;
+
+        TextView homeTeamGoals;
         TextView awayTeamGoals;
+        TextView resultSeparator;
 
         TextView elapsed;
 
@@ -72,11 +76,13 @@ public class AdapterMatches extends RecyclerView.Adapter<AdapterMatches.ViewHold
             super(itemView);
             homeTeamName = itemView.findViewById(R.id.tv_fixtures_item_team_name_home);
             homeTeamLogo = itemView.findViewById(R.id.iv_fixtures_item_team_logo_home);
-            homeTeamGoals = itemView.findViewById(R.id.tv_fixtures_item_result_home);
 
             awayTeamName = itemView.findViewById(R.id.tv_fixtures_item_team_name_away);
             awayTeamLogo = itemView.findViewById(R.id.iv_fixtures_item_team_logo_away);
+
+            homeTeamGoals = itemView.findViewById(R.id.tv_fixtures_item_result_home);
             awayTeamGoals = itemView.findViewById(R.id.tv_fixtures_item_result_away);
+            resultSeparator = itemView.findViewById(R.id.tv_fixtures_item_result_separator);
 
             elapsed = itemView.findViewById(R.id.tv_fixtures_item_time);
         }

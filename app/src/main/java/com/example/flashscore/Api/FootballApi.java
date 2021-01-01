@@ -161,6 +161,8 @@ public class FootballApi {
                                 fixture.setElapsed(apiFixture.getInt("elapsed"));
                                 fixture.setStatus(apiFixture.getString("status"));
 
+                                fixture.setEventDate(apiFixture.getLong("event_timestamp"));
+
                                 fixtureList.add(fixture);
                             }
                             fixturesResponse.onResponse(fixtureList);
