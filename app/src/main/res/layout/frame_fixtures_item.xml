@@ -23,7 +23,7 @@
         android:id="@+id/fixtures_item_team_home"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fixtures_item_result"
         app:layout_constraintStart_toEndOf="@+id/fixtures_item_time"
@@ -42,9 +42,9 @@
 
         <ImageView
             android:id="@+id/iv_fixtures_item_team_logo_home"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="1dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_fixtures_item_team_name_home"
@@ -63,35 +63,42 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/iv_fixtures_item_result_home"
+            android:id="@+id/tv_fixtures_item_result_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd"
+            android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_fixtures_item_result_separator"
+            app:layout_constraintEnd_toStartOf="@+id/tv_fixtures_item_result_separator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/iv_fixtures_item_result_separator"
+            android:id="@+id/tv_fixtures_item_result_separator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:text=":"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/iv_fixtures_item_result_away"
-            app:layout_constraintStart_toEndOf="@+id/iv_fixtures_item_result_home"
+            app:layout_constraintEnd_toStartOf="@+id/tv_fixtures_item_result_away"
+            app:layout_constraintStart_toEndOf="@+id/tv_fixtures_item_result_home"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/iv_fixtures_item_result_away"
+            android:id="@+id/tv_fixtures_item_result_away"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_fixtures_item_result_separator"
+            app:layout_constraintStart_toEndOf="@+id/tv_fixtures_item_result_separator"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -99,7 +106,7 @@
         android:id="@+id/fixtures_item_team_away"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_fixtures_item_dummy_tv"
         app:layout_constraintStart_toEndOf="@+id/fixtures_item_result"
@@ -109,6 +116,7 @@
             android:id="@+id/tv_fixtures_item_team_name_away"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text="Away team"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_fixtures_item_team_logo_away"
@@ -116,8 +124,8 @@
 
         <ImageView
             android:id="@+id/iv_fixtures_item_team_logo_away"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv_fixtures_item_team_name_away"
             app:layout_constraintStart_toStartOf="parent"

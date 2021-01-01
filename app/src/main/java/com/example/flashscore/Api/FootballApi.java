@@ -33,7 +33,7 @@ public class FootballApi {
     }
 
     private void setApiKey() {
-        this.apiKey = "";
+        this.apiKey = "350eaec8e6msha7fa53bf1619c0bp1acaddjsn745164ebc029";
     }
 
     /*
@@ -131,13 +131,18 @@ public class FootballApi {
                                 Map<String, String> homeTeam = new HashMap<>();
                                 homeTeam.put("teamId", homeTeamApi.getString("team_id"));
                                 homeTeam.put("teamName", homeTeamApi.getString("team_name"));
+                                homeTeam.put("teamLogo", homeTeamApi.getString("logo"));
                                 fixture.setHomeTeam(homeTeam);
 
                                 JSONObject awayTeamApi = apiFixture.getJSONObject("awayTeam");
                                 Map<String, String> awayTeam = new HashMap<>();
                                 awayTeam.put("teamId", awayTeamApi.getString("team_id"));
                                 awayTeam.put("teamName", awayTeamApi.getString("team_name"));
+                                awayTeam.put("teamLogo", awayTeamApi.getString("logo"));
                                 fixture.setAwayTeam(awayTeam);
+
+                                fixture.setGoalsHomeTeam(apiFixture.getInt("goalsHomeTeam"));
+                                fixture.setGoalsAwayTeam(apiFixture.getInt("goalsAwayTeam"));
 
                                 fixtureList.add(fixture);
                             }
