@@ -1,6 +1,7 @@
 package com.example.flashscore.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.flashscore.DataModels.Fixture;
+import com.example.flashscore.MatchPreview;
 import com.example.flashscore.R;
 
 import java.util.List;
@@ -52,6 +55,15 @@ public class AdapterMatches extends RecyclerView.Adapter<AdapterMatches.ViewHold
         } else {
             holder.elapsed.setTextColor(ContextCompat.getColor(holder.elapsed.getContext(), R.color.colorPrimary));
         }
+
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.parentLayout.getContext(), MatchPreview.class);
+                intent.putExtra("matchId", fixtureItemList.get(position).getId());
+                holder.parentLayout.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -60,6 +72,8 @@ public class AdapterMatches extends RecyclerView.Adapter<AdapterMatches.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        ConstraintLayout parentLayout;
+
         TextView homeTeamName;
         ImageView homeTeamLogo;
 
@@ -74,6 +88,8 @@ public class AdapterMatches extends RecyclerView.Adapter<AdapterMatches.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            parentLayout = itemView.findViewById(R.id.fixture_item);
+
             homeTeamName = itemView.findViewById(R.id.tv_fixtures_item_team_name_home);
             homeTeamLogo = itemView.findViewById(R.id.iv_fixtures_item_team_logo_home);
 
