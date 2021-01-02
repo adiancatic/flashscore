@@ -27,8 +27,11 @@ public class FootballApi {
     private static final String BASE_URL = "https://api-football-v1.p.rapidapi.com/v2/";
     private String apiKey;
 
+    private int fixtureId = 0;
+
     public static int FIXTURE_TYPE_LIVE = 1;
     public static int FIXTURE_TYPE_DATE = 2;
+    public static int FIXTURE_TYPE_ID = 3;
 
     public FootballApi(Context context) {
         this.context = context;
@@ -37,6 +40,10 @@ public class FootballApi {
 
     private void setApiKey() {
         this.apiKey = "350eaec8e6msha7fa53bf1619c0bp1acaddjsn745164ebc029";
+    }
+
+    public void setFixtureId(int fixtureId) {
+        this.fixtureId = fixtureId;
     }
 
     /*
@@ -108,12 +115,15 @@ public class FootballApi {
     }
 
     public void getFixtures(final FixturesResponse fixturesResponse, int type) {
-        String url = "";
+        String url = BASE_URL;
         if(type == FIXTURE_TYPE_LIVE) {
-            url = BASE_URL + Endpoints.FIXTURES_LIVE;
+            url += Endpoints.FIXTURES_LIVE;
         } else if(type == FIXTURE_TYPE_DATE) {
-            url = BASE_URL + Endpoints.FIXTURES_DATE + "/" + java.time.LocalDate.now() + "?timezone=Europe/Ljubljana";
+            url += Endpoints.FIXTURES_DATE + "/" + java.time.LocalDate.now() + "?timezone=Europe/Ljubljana";
+        } else if(type == FIXTURE_TYPE_ID && fixtureId != 0) {
+            url += Endpoints.FIXTURES_ID + "/" + fixtureId;
         }
+
         final List<Fixture> fixtureList = new ArrayList<>();
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
