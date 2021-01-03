@@ -11,4 +11,6 @@ public class Endpoints {
     public static final String LEAGUES = "leagues";
     public static final String LEAGUES_ID = "leagues/league";
 
+    public static final String STANDINGS = "leagueTable";
+
 }

@@ -11,6 +11,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.flashscore.DataModels.Country;
 import com.example.flashscore.DataModels.Fixture;
 import com.example.flashscore.DataModels.League;
+import com.example.flashscore.DataModels.Standings;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -168,6 +169,68 @@ public class FootballApi {
                         Log.e("Rest Error", error.toString());
                         error.printStackTrace();
                         leaguesResponse.onError("Something wrong");
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("X-RapidAPI-Key", apiKey);
+
+                return params;
+            }
+        };
+
+        RequestSingleton.getInstance(context).addToRequestQueue(objectRequest);
+    }
+
+    /*
+     * Standings
+     */
+
+    public interface StandingsResponse {
+        void onError(String message);
+        void onResponse(List<Standings> standingsList);
+    }
+
+    public void getStandings(final StandingsResponse standingsResponse) {
+        String url = BASE_URL + "/" + Endpoints.STANDINGS + "/" + leagueId;
+
+        final List<Standings> standingsList = new ArrayList<>();
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Rest Response", response.toString());
+                        try {
+                            JSONObject api = response.getJSONObject("api");
+                            JSONArray apiStandingsList = api.getJSONArray("standings").getJSONArray(0);
+                            for (int i = 0; i < apiStandingsList.length(); i++) {
+                                Standings standings = new Standings();
+                                JSONObject apiStandings = (JSONObject) apiStandingsList.get(i);
+                                standings.setRank(apiStandings.getInt("rank"));
+                                standings.setTeamId(apiStandings.getInt("team_id"));
+                                standings.setTeamName(apiStandings.getString("teamName"));
+                                standings.setTeamLogo(apiStandings.getString("logo"));
+                                standings.setForme(apiStandings.getString("forme"));
+                                standingsList.add(standings);
+                            }
+                            standingsResponse.onResponse(standingsList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Rest Error", error.toString());
+                        error.printStackTrace();
+                        standingsResponse.onError("Something wrong");
                     }
                 }
         ) {
