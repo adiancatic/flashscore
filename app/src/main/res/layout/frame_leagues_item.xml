@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="4dp"
-    android:paddingEnd="16dp">
+    android:paddingEnd="16dp"
+    android:id="@+id/league_item">
 
     <ImageView
         android:id="@+id/iv_league_item_logo"

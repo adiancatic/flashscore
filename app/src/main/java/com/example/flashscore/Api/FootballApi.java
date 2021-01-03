@@ -29,10 +29,14 @@ public class FootballApi {
     private String apiKey;
 
     private int fixtureId = 0;
+    private int leagueId = 0;
 
     public static int FIXTURE_TYPE_LIVE = 1;
     public static int FIXTURE_TYPE_DATE = 2;
     public static int FIXTURE_TYPE_ID = 3;
+
+    public static int LEAGUE_TYPE_ALL = 11;
+    public static int LEAGUE_TYPE_ID = 12;
 
     public FootballApi(Context context) {
         this.context = context;
@@ -45,6 +49,10 @@ public class FootballApi {
 
     public void setFixtureId(int fixtureId) {
         this.fixtureId = fixtureId;
+    }
+
+    public void setLeagueId(int leagueId) {
+        this.leagueId = leagueId;
     }
 
     /*
@@ -115,8 +123,14 @@ public class FootballApi {
         void onResponse(List<League> leaguesList);
     }
 
-    public void getLeagues(final LeaguesResponse leaguesResponse) {
-        String url = BASE_URL + Endpoints.LEAGUES;
+    public void getLeagues(final LeaguesResponse leaguesResponse, int type) {
+        String url = BASE_URL;
+        if(type == LEAGUE_TYPE_ALL) {
+            url += Endpoints.LEAGUES;
+        } else if(type == LEAGUE_TYPE_ID && leagueId != 0) {
+            url += Endpoints.LEAGUES_ID + "/" + leagueId;
+        }
+
         final List<League> leaguesList = new ArrayList<>();
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(

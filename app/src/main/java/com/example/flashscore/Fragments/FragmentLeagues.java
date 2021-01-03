@@ -55,7 +55,7 @@ public class FragmentLeagues extends Fragment {
 
                 leaguesItemList = leaguesList;
             }
-        });
+        }, footballApi.LEAGUE_TYPE_ALL);
     }
 
     @Override
