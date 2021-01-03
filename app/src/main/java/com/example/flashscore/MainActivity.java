@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         topLevelDestinations.add(R.id.fr_matches_all);
         topLevelDestinations.add(R.id.fr_matches_live);
         topLevelDestinations.add(R.id.fr_more_actions);
+        topLevelDestinations.add(R.id.fr_leagues);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(topLevelDestinations).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }

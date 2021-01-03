@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.flashscore.DataModels.Country;
 import com.example.flashscore.DataModels.Fixture;
+import com.example.flashscore.DataModels.League;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,8 +71,8 @@ public class FootballApi {
                         try {
                             JSONObject api = response.getJSONObject("api");
                             JSONArray apiCountryList = api.getJSONArray("countries");
-                            Country country = new Country();
                             for (int i = 0; i < apiCountryList.length(); i++) {
+                                Country country = new Country();
                                 JSONObject apiCountry = (JSONObject) apiCountryList.get(i);
                                 country.setName(apiCountry.getString("country"));
                                 country.setCode(apiCountry.getString("code"));
@@ -96,6 +97,69 @@ public class FootballApi {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
+                params.put("X-RapidAPI-Key", apiKey);
+
+                return params;
+            }
+        };
+
+        RequestSingleton.getInstance(context).addToRequestQueue(objectRequest);
+    }
+
+    /*
+     * Leagues
+     */
+
+    public interface LeaguesResponse {
+        void onError(String message);
+        void onResponse(List<League> leaguesList);
+    }
+
+    public void getLeagues(final LeaguesResponse leaguesResponse) {
+        String url = BASE_URL + Endpoints.LEAGUES;
+        final List<League> leaguesList = new ArrayList<>();
+
+        JsonObjectRequest objectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("Rest Response", response.toString());
+                        try {
+                            JSONObject api = response.getJSONObject("api");
+                            JSONArray apiLeaguesList = api.getJSONArray("leagues");
+                            for (int i = 0; i < apiLeaguesList.length(); i++) {
+                                League league = new League();
+                                JSONObject apiLeague = (JSONObject) apiLeaguesList.get(i);
+                                league.setId(apiLeague.getInt("league_id"));
+                                league.setName(apiLeague.getString("name"));
+                                league.setType(apiLeague.getString("type"));
+                                league.setCountry(apiLeague.getString("country"));
+                                league.setCountryCode(apiLeague.getString("country_code"));
+                                league.setLogo(apiLeague.getString("logo"));
+                                league.setFlag(apiLeague.getString("flag"));
+                                leaguesList.add(league);
+                            }
+                            leaguesResponse.onResponse(leaguesList);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Rest Error", error.toString());
+                        error.printStackTrace();
+                        leaguesResponse.onError("Something wrong");
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("X-RapidAPI-Key", apiKey);
 
                 return params;

@@ -12,6 +12,11 @@
         android:title="@string/matches_live" />
 
     <item
+        android:id="@+id/fr_leagues"
+        android:icon="@drawable/ic_trophy"
+        android:title="@string/leagues" />
+
+    <item
         android:id="@+id/fr_more_actions"
         android:icon="@drawable/ic_more"
         android:title="@string/more_actions" />

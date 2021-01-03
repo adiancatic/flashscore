@@ -20,5 +20,10 @@
         android:name="com.example.flashscore.Fragments.FragmentMoreActions"
         android:label="@string/more_actions"
         tools:layout="@layout/fragment_more_actions" />
+    <fragment
+        android:id="@+id/fr_leagues"
+        android:name="com.example.flashscore.Fragments.FragmentLeagues"
+        android:label="@string/leagues"
+        tools:layout="@layout/fragment_leagues" />
 
 </navigation>
