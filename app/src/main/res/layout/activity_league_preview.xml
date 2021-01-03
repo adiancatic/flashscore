@@ -13,19 +13,43 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorOffwhite"
             app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_league_logo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_league_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
                 android:text="League"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColor="#000"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/iv_league_logo"
+                app:layout_constraintTop_toTopOf="@+id/iv_league_logo" />
+
+            <TextView
+                android:id="@+id/tv_league_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:text="Country"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_league_logo"
+                app:layout_constraintStart_toEndOf="@+id/iv_league_logo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginEnd="8dp"
-                android:text="Team name"
+                android:text="Team"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_played_label"

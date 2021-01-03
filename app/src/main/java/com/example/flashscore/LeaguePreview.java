@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.flashscore.Adapters.AdapterMatches;
 import com.example.flashscore.Adapters.AdapterStandings;
 import com.example.flashscore.Api.FootballApi;
@@ -32,8 +33,9 @@ public class LeaguePreview extends AppCompatActivity {
     private int leagueId;
     private League leagueData;
 
-    TextView leagueName;
     ImageView leagueLogo;
+    TextView leagueName;
+    TextView leagueCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +44,22 @@ public class LeaguePreview extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
-            // actionBar.setTitle("");
+            actionBar.setTitle(getResources().getString(R.string.leagues));
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        leagueLogo = findViewById(R.id.iv_league_logo);
         leagueName = findViewById(R.id.tv_league_name);
+        leagueCountry = findViewById(R.id.tv_league_country);
 
         Intent intent = getIntent();
         leagueId = intent.getIntExtra("leagueId", -1);
     }
 
     private void setData() {
+        Glide.with(leagueLogo.getContext()).load(leagueData.getLogo()).into(leagueLogo);
         leagueName.setText(leagueData.getName());
+        leagueCountry.setText(leagueData.getCountry());
     }
 
     @Override
