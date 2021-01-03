@@ -217,6 +217,20 @@ public class FootballApi {
                                 standings.setTeamName(apiStandings.getString("teamName"));
                                 standings.setTeamLogo(apiStandings.getString("logo"));
                                 standings.setForme(apiStandings.getString("forme"));
+
+                                JSONObject statsAllApi = apiStandings.getJSONObject("all");
+                                Map<String, Integer> statsAll = new HashMap<>();
+                                statsAll.put("played", statsAllApi.getInt("matchsPlayed"));
+                                statsAll.put("wins", statsAllApi.getInt("win"));
+                                statsAll.put("draws", statsAllApi.getInt("draw"));
+                                statsAll.put("loses", statsAllApi.getInt("lose"));
+                                statsAll.put("goalsFor", statsAllApi.getInt("goalsFor"));
+                                statsAll.put("goalsAgainst", statsAllApi.getInt("goalsAgainst"));
+                                standings.setStatsAll(statsAll);
+
+                                standings.setGoalDifference(apiStandings.getInt("goalsDiff"));
+                                standings.setPoints(apiStandings.getInt("points"));
+
                                 standingsList.add(standings);
                             }
                             standingsResponse.onResponse(standingsList);

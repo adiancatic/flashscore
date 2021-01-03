@@ -4,24 +4,127 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingVertical="6dp">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="4dp"
+        android:layout_height="0dp"
+        android:background="@color/colorOffwhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_rank"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:text="0"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_standings_item_team_logo"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_standings_item_rank"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_standings_item_team_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Team name"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_played"
         app:layout_constraintStart_toEndOf="@+id/iv_standings_item_team_logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_played"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_wins"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_wins"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_draws"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_draws"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_loses"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_loses"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_goal_difference_long"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_goal_difference_long"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_goal_difference"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_goal_difference"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="0"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_standings_item_points"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_standings_item_points"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:text="0"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textAlignment="textEnd"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
