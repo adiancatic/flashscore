@@ -27,7 +27,6 @@ import java.util.List;
 public class LeaguePreview extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private View view;
     private List<Standings> standingsItemList;
 
     private int leagueId;

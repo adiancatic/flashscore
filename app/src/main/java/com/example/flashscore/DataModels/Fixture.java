@@ -2,9 +2,8 @@ package com.example.flashscore.DataModels;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 
 public class Fixture {
@@ -18,15 +17,12 @@ public class Fixture {
     private int elapsed;
     private String status;
     private Date eventDate;
+    private List<Map<String, String>> events;
 
     private String venue;
 
     public Fixture() {
-    }
 
-    public Fixture(Map<String, String> homeTeam, Map<String, String> awayTeam) {
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
     }
 
     @Override
@@ -182,5 +178,13 @@ public class Fixture {
 
     public void setEventDate(long eventTimestamp) {
         this.eventDate = new Date(eventTimestamp * 1000L);
+    }
+
+    public List<Map<String, String>> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Map<String, String>> events) {
+        this.events = events;
     }
 }

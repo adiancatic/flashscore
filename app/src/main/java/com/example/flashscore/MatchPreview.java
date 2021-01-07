@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,20 +14,28 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.flashscore.Adapters.AdapterMatchEvent;
+import com.example.flashscore.Adapters.AdapterMatches;
 import com.example.flashscore.Api.FootballApi;
 import com.example.flashscore.DataModels.Country;
 import com.example.flashscore.DataModels.Fixture;
+import com.example.flashscore.DataModels.Standings;
 
 import java.util.List;
+import java.util.Map;
 
 public class MatchPreview extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+
     private int matchId;
     private Fixture matchData;
+    private List<Map<String, String>> fixtureEvents;
 
     ImageView homeTeamLogo;
     TextView homeTeamName;
@@ -87,7 +97,18 @@ public class MatchPreview extends AppCompatActivity {
             public void onResponse(List<Fixture> fixtureList) {
                 // System.out.println(fixtureList);
                 matchData = fixtureList.get(0);
+                fixtureEvents = matchData.getEvents();
                 setData();
+
+                if(fixtureEvents != null) {
+                    recyclerView = findViewById(R.id.rv_fixture_events);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(MatchPreview.this));
+
+                    int homeTeamId = Integer.parseInt(matchData.getHomeTeam().get("teamId"));
+                    int awayTeamId = Integer.parseInt(matchData.getAwayTeam().get("teamId"));
+                    recyclerView.setAdapter(new AdapterMatchEvent(fixtureEvents, homeTeamId, awayTeamId));
+                }
             }
         }, footballApi.FIXTURE_TYPE_ID);
     }

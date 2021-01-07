@@ -328,6 +328,28 @@ public class FootballApi {
 
                                 fixture.setEventDate(apiFixture.getLong("event_timestamp"));
 
+                                if(!apiFixture.isNull("events")) {
+                                    JSONArray eventsApi = apiFixture.getJSONArray("events");
+                                    List<Map<String, String>> events = new ArrayList<>();
+                                    for (int j = 0; j < eventsApi.length(); j++) {
+                                        JSONObject apiEvent = (JSONObject) eventsApi.get(j);
+                                        Map<String, String> event = new HashMap<>();
+                                        if(!apiEvent.isNull("elapsed")) event.put("elapsed", apiEvent.getString("elapsed"));
+                                        if(!apiEvent.isNull("elapsed_plus")) event.put("elapsedPlus", apiEvent.getString("elapsed_plus"));
+                                        if(!apiEvent.isNull("team_id")) event.put("teamId", apiEvent.getString("team_id"));
+                                        if(!apiEvent.isNull("teamName")) event.put("teamName", apiEvent.getString("teamName"));
+                                        if(!apiEvent.isNull("player_id")) event.put("playerId", apiEvent.getString("player_id"));
+                                        if(!apiEvent.isNull("player")) event.put("player", apiEvent.getString("player"));
+                                        if(!apiEvent.isNull("assist_id")) event.put("assistId", apiEvent.getString("assist_id"));
+                                        if(!apiEvent.isNull("assist")) event.put("assist", apiEvent.getString("assist"));
+                                        if(!apiEvent.isNull("type")) event.put("type", apiEvent.getString("type"));
+                                        if(!apiEvent.isNull("detail")) event.put("detail", apiEvent.getString("detail"));
+                                        if(!apiEvent.isNull("comments")) event.put("comments", apiEvent.getString("comments"));
+                                        events.add(event);
+                                    }
+                                    fixture.setEvents(events);
+                                }
+
                                 fixtureList.add(fixture);
                             }
                             fixturesResponse.onResponse(fixtureList);
