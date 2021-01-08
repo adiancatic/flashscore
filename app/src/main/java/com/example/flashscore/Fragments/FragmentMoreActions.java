@@ -44,9 +44,9 @@ public class FragmentMoreActions extends Fragment {
 
     private List<MoreActionsItem> initData() {
         moreActionsItemList = new ArrayList<>();
-        moreActionsItemList.add(new MoreActionsItem(R.drawable.ic_football_ball, "Option 1"));
-        moreActionsItemList.add(new MoreActionsItem(R.drawable.ic_football_ball, "Option 2"));
-        moreActionsItemList.add(new MoreActionsItem(R.drawable.ic_football_ball, "Option 3"));
+        // moreActionsItemList.add(new MoreActionsItem(R.drawable.ic_football_ball, "Option 1"));
+        // moreActionsItemList.add(new MoreActionsItem(R.drawable.ic_football_ball, "Option 2"));
+        // moreActionsItemList.add(new MoreActionsItem(R.drawable.ic_football_ball, "Option 3"));
         return moreActionsItemList;
     }
 
