@@ -124,8 +124,12 @@ public class Fixture {
         return this.status.equals("Match Postponed");
     }
 
+    public boolean isStatusTimeToBeDefined() {
+        return this.status.equals("Time to be defined");
+    }
+
     public String getElapsedString() {
-        if(this.isStatusNotStarted() || this.isStatusPostponed()) {
+        if(this.isStatusNotStarted() || this.isStatusPostponed() || this.isStatusTimeToBeDefined() || this.isStatusNotStarted()) {
             return "";
         } else if(this.isStatusHalfTime()) {
             return "HT";
@@ -137,9 +141,7 @@ public class Fixture {
     }
 
     public String getHomeResultString() {
-        if(this.isStatusNotStarted()) {
-            return "";
-        } else if(this.isStatusPostponed()) {
+        if(this.isStatusNotStarted() || this.isStatusPostponed() || this.isStatusTimeToBeDefined() || this.isStatusNotStarted()) {
             return "";
         } else {
             return String.valueOf(this.getGoalsHomeTeam());
@@ -147,9 +149,7 @@ public class Fixture {
     }
 
     public String getAwayResultString() {
-        if(this.isStatusNotStarted()) {
-            return "";
-        } else if(this.isStatusPostponed()) {
+        if(this.isStatusNotStarted() || this.isStatusPostponed() || this.isStatusTimeToBeDefined() || this.isStatusNotStarted()) {
             return "";
         } else {
             return String.valueOf(this.getGoalsAwayTeam());
@@ -161,6 +161,10 @@ public class Fixture {
             return this.getEventDateStartTime();
         } else if(this.isStatusPostponed()) {
             return "PST";
+        } else if(this.isStatusTimeToBeDefined()) {
+            return "TBD";
+        } else if(this.isStatusNotStarted()) {
+            return "NS";
         } else {
             return "-";
         }
